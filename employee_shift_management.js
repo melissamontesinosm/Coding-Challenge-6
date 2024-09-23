@@ -48,3 +48,20 @@ function calculateTotalHours(employeeName) {
 };
 
 calculateTotalHours("Kendry Paez"); //Example
+
+
+// Task 5: Create a Function to List Employees with Free Days
+
+function listAvailableEmployees(day) {
+    const availableEmployees = employees.filter(employee => 
+        !employee.shifts.some(shift => shift.day === day)); //Recognize employee without a shift
+   
+        if (availableEmployees.length > 0) {
+            const employeeNames = availableEmployees.map(employee => employee.name);
+            console.log(`For ${day} the following employees are available: ${employeeNames}`)
+        }   else {
+            console.log(`No employees are available on ${day}.`);
+        }  
+}
+
+listAvailableEmployees(`Tuesday`);

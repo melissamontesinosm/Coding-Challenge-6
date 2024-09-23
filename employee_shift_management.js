@@ -1,7 +1,7 @@
 
 // Task 1: Create an Employees Array of Employee Objects
 
-const employees = [
+let employees = [
     {name: "Gonzalo Plata", shifts: [{day: "Friday", hours: 8},{day: "Saturday", hours: 5}]},
     {name: "Moises Caicedo", shifts: [{day: "Wednesday", hours: 2}, {day: "Thursday", hours: 4}]},
     {name: "Piero Hincapie", shifts: [{day: "Tuesday", hours: 7}, {day: "Thursday", hours: 7}]},
@@ -14,11 +14,28 @@ const employees = [
 function displayEmployeeShifts (employees) {
     employees.forEach(employee => {
         const {name, shifts} = employee; //Defining employee name and shifts 
-        shifts.forEach(shift => {
-            const {day, hours} = shift;
-            console.log(`${employee.name} worked on ${day} for ${hours} hours.`);
+        const shiftDetails = shifts.map(shift => `${shift.day} (${shift.hours} hours)`); // Display day and hours, shift information
+            console.log(`${employee.name} worked on ${shiftDetails}.`);
         });
-    });
-}
-displayEmployeeShifts(employees);
+    };
+
+displayEmployeeShifts(employees);//Run Function
+
+
+// Task 3: Create a Function to Assign a New Shift
+
+function assignShift (employeeName, day, hours) {
+    let employee= employees.find(employee => employee.name === employeeName); //Find Employees in Array
+    const hasShift = employee.shifts.some(shift => shift.day === day);
+
+    if (hasShift) {
+        console.log(`ERROR: ${employeeName} already has a shift on ${day}`); //Shift is already covered, Error display
+    } else {
+        employee.shifts.push({day,hours}); //If employee is available
+            console.log(`Shift added for: ${employeeName} on ${day}`)
+        }
+    }
+
+    assignShift("Moises Caicedo", "Friday", 3); //Example
+    
 
